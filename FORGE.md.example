@@ -1,0 +1,75 @@
+# FORGE.md — Project Rules for Forge Agent
+
+> Copy this file to your project root and customize.
+
+## Project Overview
+
+Describe your project here so Forge understands the codebase.
+
+## Architecture
+
+```yaml
+architecture:
+  layers:
+    - types
+    - config
+    - repository
+    - service
+    - handler
+  cross_cutting:
+    - util
+    - common
+```
+
+## Permissions
+
+```yaml
+permissions:
+  deny:
+    - tool: bash
+      pattern: "rm\\s+-rf"
+    - tool: bash
+      pattern: "sudo"
+    - tool: edit_file
+      path: "\\.lock$"
+    - tool: edit_file
+      path: "\\.env$"
+  ask:
+    - tool: bash
+    - tool: git_commit
+  allow:
+    - tool: read_file
+    - tool: search_code
+    - tool: list_directory
+    - tool: git_status
+    - tool: git_diff
+    - tool: git_log
+```
+
+## Lint
+
+```yaml
+lint:
+  command: "ruff check ."
+  auto_fix_command: "ruff check --fix ."
+
+structural:
+  max_file_lines: 500
+  max_function_lines: 80
+  naming:
+    files: snake_case
+    classes: PascalCase
+  forbidden_patterns:
+    - pattern: "print\\("
+      exclude: ["cli.py", "terminal_ui.py"]
+      message: "Use logging instead of print()"
+    - pattern: "TODO(?!\\s*\\[feat-)"
+      message: "TODO must reference a feature ID, e.g. TODO [feat-001]"
+```
+
+## Conventions
+
+- Use `read_file` before editing any file.
+- Run tests after every change.
+- One feature at a time.
+- Prefer explicit over implicit.

@@ -1,0 +1,3 @@
+{"ts": 1776489776.0776982, "elapsed_s": 0.0, "session_id": "0f389a9a9908", "type": "session_start", "data": {"mode": "execute", "model": "qwen3-coder-plus", "project_root": "C:\\Users\\mafeiyu\\Desktop\\实习学习\\forge_v2", "tool_count": 10}}
+{"ts": 1776489778.1952274, "elapsed_s": 2.118, "session_id": "0f389a9a9908", "type": "session_summary", "data": {"iterations": 0, "input_tokens": 0, "output_tokens": 0, "compaction_count": 0, "final_token_ratio": 0.0, "total_messages": 0}}
+{"ts": 1776489778.1952274, "elapsed_s": 2.118, "session_id": "0f389a9a9908", "type": "session_end", "data": {"total_elapsed_s": 2.118, "rotations": 0}}

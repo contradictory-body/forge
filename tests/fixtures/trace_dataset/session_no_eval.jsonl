@@ -1,0 +1,6 @@
+{"ts": 1700100001.0, "elapsed_s": 0.1, "session_id": "ccc333ddd444", "type": "session_start", "data": {"mode": "plan", "model": "qwen3-coder-plus"}}
+{"ts": 1700100002.0, "elapsed_s": 1.0, "session_id": "ccc333ddd444", "type": "turn_start", "data": {"turn": 1, "messages_count": 1, "token_ratio": 0.02}}
+{"ts": 1700100003.0, "elapsed_s": 2.0, "session_id": "ccc333ddd444", "type": "llm_call", "data": {"duration_ms": 800, "input_tokens": 600, "output_tokens": 90, "tool_calls_returned": 1}}
+{"ts": 1700100004.0, "elapsed_s": 3.0, "session_id": "ccc333ddd444", "type": "tool_call", "data": {"tool": "read_file", "id": "tc_001", "is_error": false, "duration_ms": 4, "permission": "allow"}}
+{"ts": 1700100010.0, "elapsed_s": 9.0, "session_id": "ccc333ddd444", "type": "session_summary", "data": {"iterations": 2, "input_tokens": 1200, "output_tokens": 180, "compaction_count": 0, "total_messages": 4}}
+{"ts": 1700100011.0, "elapsed_s": 10.0, "session_id": "ccc333ddd444", "type": "session_end", "data": {"total_elapsed_s": 10.0, "rotations": 0}}

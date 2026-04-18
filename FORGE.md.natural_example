@@ -1,0 +1,71 @@
+# FORGE.md — My Todo API
+
+This file tells the Forge coding agent the rules for working on this project.
+Write it in plain prose — Forge will read your intent and compile it into
+structured rules at startup.
+
+## What this project is
+
+A REST API for personal todo lists. Built with Python 3.11, FastAPI, and
+SQLAlchemy. PostgreSQL in production, SQLite for local development and tests.
+
+## Architecture
+
+The codebase is strictly layered. From the bottom up:
+
+1. **types** — Pydantic schemas and shared data classes. No dependencies on
+   anything else in the project.
+2. **config** — Environment variable loading, database URLs, feature flags.
+   May depend on types.
+3. **repository** — Direct database access (SQLAlchemy queries). May depend
+   on config and types.
+4. **service** — Business logic. Calls repositories, enforces invariants.
+   May depend on repository, config, types.
+5. **handler** — FastAPI route handlers. May depend on service.
+
+Each layer may only import from the layer immediately below it — handler
+cannot skip service and talk directly to repository. The `util` and `common`
+modules are cross-cutting: anything may import from them.
+
+## Rules for the agent
+
+- Always read a file with `read_file` before editing it.
+- Run the tests after every change you make.
+- Work on one feature at a time — don't interleave multiple features.
+- Prefer explicit code over clever abstractions.
+- When you finish a feature, call `mark_feature_complete`.
+
+## What's forbidden
+
+- Never run `rm -rf` or use `sudo` in bash — these are blocked at the tool
+  level.
+- Do not edit any `.env` file or any `*.lock` file.
+- Do not use `print()` in application code. Use the `logging` module instead.
+  Exception: it's fine in `cli.py` and anywhere under `scripts/`.
+- Every `TODO` comment must reference a feature ID, e.g. `TODO [feat-012]`.
+  Bare TODOs will be flagged.
+
+## What needs permission
+
+Ask me before running any bash command that isn't in the always-allowed list
+below. Also ask before committing to git.
+
+## What's always allowed
+
+These tools are pre-approved and won't prompt: `read_file`, `search_code`,
+`list_directory`, `git_status`, `git_diff`, `git_log`. Any read-only
+inspection is fine.
+
+## Linting and style
+
+Run `ruff check .` to lint. To auto-fix what's fixable, `ruff check --fix .`.
+
+Keep files under 500 lines and functions under 80 lines. Files are
+`snake_case`, classes are `PascalCase`. If a file grows past these limits,
+split it.
+
+## External tools (MCP)
+
+- A local MCP server called `project-db` runs at `http://localhost:7422/sse`
+  and exposes query tools for the staging database. Use it for read-only
+  data exploration.
